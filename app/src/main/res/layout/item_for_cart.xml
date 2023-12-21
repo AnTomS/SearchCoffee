@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/kinda_rose"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/coffee_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_coffee"
+            android:textSize="@dimen/text_large"
+            android:textColor="@color/main_text"
+             />
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/coffee_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/coffee_name"
+            android:text="200 руб."
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/text_medium" />
+
+        <!-- Блок с кнопками "-" и "+" -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <!-- Кнопка "-" для уменьшения количества -->
+            <ImageView
+                android:clickable="true"
+                android:id="@+id/imageDecreaseDish"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/remove_dark_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/spacing_low"
+                android:paddingRight="@dimen/spacing_low"
+                android:textColor="@color/main_text"
+                android:text="1"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintStart_toEndOf="@id/imageDecreaseDish"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageIncreaseDish"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/add_dark_24"
+                app:layout_constraintStart_toEndOf="@id/textViewQuantity"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

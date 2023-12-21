@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SearchCoffe</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="e_mail">e-mail</string>
+    <string name="example_mail">example@example.ru</string>
+    <string name="lbl_pass">Пароль</string>
+    <string name="example_pass">введите пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="pass_conf">Повторите пароль</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="reg">Регистрации</string>
+    <string name="name_coffe">Название кофейни</string>
+    <string name="distance">расстояние до пользователя</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="price_coffe">стоимость порции</string>
+    <string name="name_coffee">название напитка</string>
+</resources>
