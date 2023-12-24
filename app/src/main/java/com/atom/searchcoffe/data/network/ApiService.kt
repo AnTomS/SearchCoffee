@@ -13,7 +13,6 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-
     @POST("/auth/register")
     suspend fun register(@Body request: RegisterRequest): AuthResponse
 

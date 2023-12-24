@@ -6,11 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/kinda_white"
     android:orientation="vertical"
-    tools:context=".ui.RegisterFragment">
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_gravity="bottom"
+    android:fillViewport="true"
+    tools:context=".ui.reg.RegisterFragment">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -169,5 +167,4 @@
                 app:backgroundTint="@color/kinda_brown"
                 app:cornerRadius="24.5dp" />
         </FrameLayout>
-    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

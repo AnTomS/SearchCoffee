@@ -7,7 +7,6 @@ import com.atom.searchcoffe.domain.dto.MenuItem
 import com.atom.searchcoffe.domain.dto.RegisterRequest
 
 interface Repository {
-
     suspend fun register(request: RegisterRequest): AuthResponse
 
     suspend fun login(request: LoginRequest): AuthResponse

@@ -4,8 +4,8 @@ package com.atom.searchcoffe.domain.dto
 import com.google.gson.annotations.SerializedName
 
 data class RegisterRequest(
-    @SerializedName("token")
-    val token: String,
-    @SerializedName("tokenLifetime")
-    val tokenLifetime: Int
+    @SerializedName("login")
+    val login: String,
+    @SerializedName("password")
+    val password: String
 )

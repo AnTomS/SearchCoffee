@@ -3,30 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.atom.searchcoffe.ui.RegisterFragment"
+        android:name="com.atom.searchcoffe.ui.reg.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/authFragment"
-        android:name="com.atom.searchcoffe.ui.AuthFragment"
-        android:label="fragment_auth"
-        tools:layout="@layout/fragment_auth" />
+        android:id="@+id/loginFragment"
+        android:name="com.atom.searchcoffe.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_CoffeShopFragment"
+            app:destination="@id/coffee_shop_Fragment" />
+    </fragment>
     <fragment
-        android:id="@+id/listOfCoffeFragment"
-        android:name="com.atom.searchcoffe.ui.ListOfCoffeShopFragment"
-        android:label="fragment_list_of_coffe"
-        tools:layout="@layout/fragment_list_of_coffeshop" />
+        android:id="@+id/coffee_shop_Fragment"
+        android:name="com.atom.searchcoffe.ui.coffeeshop.CoffeeShopFragment"
+        android:label="fragment_list_of_coffeshop"
+        tools:layout="@layout/fragment_coffee_shop">
+
+
+        <action
+            android:id="@+id/action_coffee_shop_Fragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:launchSingleTop="false">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.atom.searchcoffe.ui.CartFragment"
+        android:name="com.atom.searchcoffe.ui.cart.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.atom.searchcoffe.ui.MenuFragment"
+        android:name="com.atom.searchcoffe.ui.menu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
 </navigation>

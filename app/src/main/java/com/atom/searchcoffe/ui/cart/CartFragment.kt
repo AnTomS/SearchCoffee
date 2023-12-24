@@ -1,4 +1,4 @@
-package com.atom.searchcoffe.ui
+package com.atom.searchcoffe.ui.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.atom.searchcoffe.R
 
-class MenuFragment : Fragment() {
+
+class CartFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        return inflater.inflate(R.layout.fragment_cart, container, false)
     }
 
 }
