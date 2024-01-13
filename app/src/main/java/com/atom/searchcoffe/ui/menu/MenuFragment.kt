@@ -6,25 +6,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.atom.searchcoffe.App
 import com.atom.searchcoffe.databinding.FragmentMenuBinding
+import com.atom.searchcoffe.domain.dto.CartItem
 import javax.inject.Inject
 
-class MenuFragment : Fragment() {
+class MenuFragment : Fragment(), MenAdapter.OnCartClickListener {
 
 
     private var _binding: FragmentMenuBinding? = null
 
     private val binding get() = _binding!!
 
+
     @Inject
     lateinit var menuViewModel: MenuViewModel
 
-    private lateinit var menuAdapter: MenuAdapter
+    private lateinit var menuAdapter: MenAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,11 +46,9 @@ class MenuFragment : Fragment() {
 
         val id = arguments?.getInt("id")
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
-        menuAdapter = MenuAdapter(
-            menuItems = emptyList(),
-            onAddClickListener = { menuItem -> menuViewModel.addToCart(menuItem) },
-            onRemoveClickListener = { menuItem -> menuViewModel.removeFromCart(menuItem) }
-        )
+
+
+        menuAdapter = MenAdapter(this)
 
         binding.recyclerView1.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
@@ -65,14 +63,38 @@ class MenuFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        menuViewModel.menuItems.observe(viewLifecycleOwner) { menuItems ->
-            Log.e("MenuFragment", menuItems.toString())
-            menuAdapter.updateMenuItems(menuItems)
+        menuViewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
+            Log.e("MenuFragment", cartItems.toString())
+            // Передаем в адаптер новый список и старый, чтобы управлять обновлением
+            menuAdapter.submitList(cartItems) {
+                menuAdapter.notifyDataSetChanged()
+            }
+
+        }
+
+        menuViewModel.updatedCartItem.observe(viewLifecycleOwner) { updatedCartItem ->
+            // Находим позицию обновленного элемента в списке и обновляем только этот элемент
+            val position = menuAdapter.currentList.indexOfFirst { it.coffee.id == updatedCartItem.first.id }
+            if (position != -1) {
+                menuAdapter.notifyItemChanged(position)
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCartClick(item: CartItem) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onIncreaseCoffeeClick(item: CartItem) {
+        menuViewModel.increaseCoffeeQuantity(item.coffee)
+    }
+
+    override fun onDecreaseCoffeeClick(item: CartItem) {
+        menuViewModel.decreaseCoffeeQuantity(item.coffee)
     }
 }

@@ -20,12 +20,29 @@ class MenuAdapter(
 
     inner class MenuItemViewHolder(binding: ItemForMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+
         val coffeeImage: ImageView = binding.coffeeImage
         val coffeeName: TextView = binding.coffeeName
         val coffeePrice: TextView = binding.coffeePrice
-        val imageDecreaseDish: ImageView = binding.imageDecreaseDish
+        val imageDecreaseDish: ImageView = binding.imageDecreaseCoffee
         val counter: TextView = binding.textViewQuantity
-        val imageIncreaseDish: ImageView = binding.imageIncreaseDish
+        val imageIncreaseDish: ImageView = binding.imageIncreaseCoffee
+        init {
+            imageDecreaseDish.setOnClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onRemoveClickListener.invoke(menuItems[position])
+                }
+            }
+
+           imageIncreaseDish.setOnClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onAddClickListener.invoke(menuItems[position])
+                }
+            }
+        }
     }
 
     fun updateMenuItems(newMenuItems: List<Coffee>) {
@@ -42,10 +59,12 @@ class MenuAdapter(
         val menuItem = menuItems[position]
 
         holder.coffeeName.text = menuItem.name
-        holder.coffeePrice.text = "Price: ${menuItem.price}"
+        holder.coffeePrice.text = "${menuItem.price}"
         Glide.with(holder.coffeeImage.context)
             .load(menuItem.imageURL)
             .into(holder.coffeeImage)
+
+ //       holder.counter.text = "${menuItem.quantity}"
 
 
         holder.imageDecreaseDish.setOnClickListener {

@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.menu.MenuFragment"
     android:orientation="vertical">
-
-
-
-
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView1"
             android:layout_width="match_parent"
@@ -32,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:fontFamily="casual"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
             android:text="@string/go_to_pay"
             android:textAllCaps="false"
             android:textColor="@color/kinda_rose"

@@ -36,10 +36,6 @@ class CoffeeShopAdapter(
         }
     }
 
-    class MenuViewHolder {
-
-    }
-
     fun updateData(newCoffeeShops: List<LocationRespondItem>) {
         coffeeShops = newCoffeeShops
         notifyDataSetChanged()

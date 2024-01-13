@@ -71,8 +71,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/il_mail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="@dimen/width_for_btn"
-                android:layout_height="@dimen/height_for_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
 
                 android:hint="@string/example_mail"
@@ -120,8 +120,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/il_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="@dimen/width_for_btn"
-                android:layout_height="@dimen/height_for_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="24.5dp"
@@ -165,8 +165,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/il_password_conf"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="@dimen/width_for_btn"
-                android:layout_height="@dimen/height_for_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="24.5dp"
@@ -193,8 +193,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_sign_up"
-            android:layout_width="@dimen/width_for_btn"
-            android:layout_height="@dimen/height_for_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_medium"

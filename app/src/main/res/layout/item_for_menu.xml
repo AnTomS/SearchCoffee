@@ -55,8 +55,9 @@
                 android:layout_margin="@dimen/spacing_low"
                 android:padding="@dimen/spacing_low">
 
-                <ImageView
-                    android:id="@+id/imageDecreaseDish"
+                <ImageButton
+                    android:background="@color/white"
+                    android:id="@+id/imageDecreaseCoffee"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:clickable="true"
@@ -72,15 +73,16 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/spacing_low"
                     android:paddingRight="@dimen/spacing_low"
-                    android:text="1"
+                    android:text="0"
                     android:textColor="@color/main_text"
                     android:textSize="@dimen/text_small"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageDecreaseDish"
+                    app:layout_constraintStart_toEndOf="@id/imageDecreaseCoffee"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageIncreaseDish"
+                <ImageButton
+                    android:background="@color/white"
+                    android:id="@+id/imageIncreaseCoffee"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/add_24"
