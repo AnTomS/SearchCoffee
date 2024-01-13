@@ -1,5 +1,6 @@
 package com.atom.searchcoffe.ui.coffeeshop
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,19 +17,28 @@ class CoffeeShopViewModel @Inject constructor(private val getLocationUseCase: Ge
     private val _locations = MutableLiveData<ResponseState<List<LocationRespondItem>>>()
     val locations: LiveData<ResponseState<List<LocationRespondItem>>> get() = _locations
 
+    private var selectedLocationId: Int? = null
 
     fun loadLocations() {
         viewModelScope.launch {
-
             _locations.value = ResponseState.Loading()
-            _locations.value = try {
-                ResponseState.Success(
-                    data = getLocationUseCase.getCoffeeShops()
-                )
-            } catch (e: Exception) {
-                ResponseState.Error()
-            }
 
+            try {
+                val coffeeShops = getLocationUseCase.getCoffeeShops()
+                _locations.value = ResponseState.Success(data = coffeeShops)
+                Log.d("CoffeeShopViewModel", "Successfully loaded coffee shops: $coffeeShops")
+            } catch (e: Exception) {
+                _locations.value = ResponseState.Error()
+                Log.e("CoffeeShopViewModel", "Error loading coffee shops", e)
+            }
         }
+    }
+
+    fun setSelectedLocationId(locationId: Int) {
+        selectedLocationId = locationId
+    }
+
+    fun getSelectedLocationId(): Int? {
+        return selectedLocationId
     }
 }

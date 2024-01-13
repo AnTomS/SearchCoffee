@@ -4,25 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.menu.MenuFragment">
+    tools:context=".ui.menu.MenuFragment"
+    android:orientation="vertical">
 
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:nestedScrollingEnabled="true"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_for_menu" />
+            tools:listitem="@layout/item_for_menu"
+            android:layout_above="@id/go_to_payment"/>
 
-    </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/go_to_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:fontFamily="casual"
+            android:text="@string/go_to_pay"
+            android:textAllCaps="false"
+            android:textColor="@color/kinda_rose"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:backgroundTint="@color/kinda_brown"
+            app:cornerRadius="24.5dp" />
 </LinearLayout>

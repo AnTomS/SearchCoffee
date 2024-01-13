@@ -2,9 +2,9 @@ package com.atom.searchcoffe.data.repository
 
 import com.atom.searchcoffe.data.network.ApiService
 import com.atom.searchcoffe.domain.dto.AuthResponse
+import com.atom.searchcoffe.domain.dto.Coffee
 import com.atom.searchcoffe.domain.dto.LocationRespondItem
 import com.atom.searchcoffe.domain.dto.LoginRequest
-import com.atom.searchcoffe.domain.dto.MenuItem
 import com.atom.searchcoffe.domain.dto.RegisterRequest
 import com.atom.searchcoffe.domain.repository.Repository
 import javax.inject.Inject
@@ -19,7 +19,7 @@ class RepositoryImpl @Inject constructor(private val apiService: ApiService) : R
     override suspend fun getLocations(): List<LocationRespondItem> =
         apiService.getLocations()
 
-    override suspend fun getMenu(locationId: Int): List<MenuItem> =
+    override suspend fun getMenu(locationId: Int): List<Coffee> =
         apiService.getMenu(locationId)
 
     override fun addToCart() {

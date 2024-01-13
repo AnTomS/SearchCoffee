@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.atom.searchcoffe.App
@@ -18,6 +19,7 @@ import com.atom.searchcoffe.ui.login.LoginFragmentDirections
 import javax.inject.Inject
 
 class RegisterFragment : Fragment() {
+
 
     private var _binding: FragmentRegisterBinding? = null
 

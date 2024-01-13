@@ -1,29 +1,30 @@
 package com.atom.searchcoffe.di
 
 import android.content.SharedPreferences
-import com.atom.searchcoffe.data.network.ApiService
+import android.util.Log
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 
 
 @Module
 class NetworkModule {
 
     companion object {
+        private const val TOKEN_KEY = "token"
         private const val BASE_URL = "http://147.78.66.203:3210/"
     }
 
     @Provides
-    fun provideAuthInterceptor(@Named("SharedForToken") sharedPreferences: SharedPreferences): Interceptor {
+    fun provideAuthInterceptor(sharedPreferences: SharedPreferences): Interceptor {
         return Interceptor { chain ->
+            val token = sharedPreferences.getString("auth_token", "") ?: ""
+            Log.d("NetworkModule", "Using token: $token")
             val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer " + provideToken(sharedPreferences))
+                .addHeader("Authorization", "Bearer $token")
                 .build()
             chain.proceed(request)
         }
@@ -47,12 +48,9 @@ class NetworkModule {
 
     @Provides
     fun provideToken(sharedPreferences: SharedPreferences): String {
-        // Получение токена из SharedPreferences
-        return sharedPreferences.getString("auth_token", "") ?: ""
+        val token = sharedPreferences.getString(TOKEN_KEY, "") ?: ""
+        Log.d("NetworkModule", "Providing token: $token")
+        return token
     }
 
-    @Provides
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
-    }
 }

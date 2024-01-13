@@ -12,9 +12,10 @@
     <string name="sign_up">Регистрация</string>
     <string name="reg">Регистрации</string>
     <string name="name_coffe">Название кофейни</string>
-    <string name="distance">расстояние до пользователя</string>
+    <string name="distance">расстояние до пользователя сейчас недоступно</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="price_coffe">стоимость порции</string>
     <string name="name_coffee">название напитка</string>
+    <string name="go_to_pay">Перейти к оплате</string>
 </resources>

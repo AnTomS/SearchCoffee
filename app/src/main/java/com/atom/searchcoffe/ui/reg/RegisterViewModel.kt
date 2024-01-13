@@ -31,17 +31,18 @@ class RegisterViewModel @Inject constructor(
         get() = _isPasswordFieldValid
 
 
-
     fun registerUser(request: RegisterRequest) {
         if (!validateInput(request.login, request.password)) {
             return
         }
         viewModelScope.launch {
             _registerState.value = ResponseState.Loading()
-            _registerState.value = try {
-                ResponseState.Success(registerUseCase.execute(request))
+            try {
+                val authResponse = registerUseCase.execute(request)
+                saveToken(authResponse.token)
+                _registerState.value = ResponseState.Success(authResponse)
             } catch (e: Exception) {
-                ResponseState.Error()
+                _registerState.value = ResponseState.Error()
             }
         }
     }

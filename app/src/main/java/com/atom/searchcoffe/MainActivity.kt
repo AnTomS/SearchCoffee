@@ -2,16 +2,13 @@ package com.atom.searchcoffe
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.atom.searchcoffe.databinding.ActivityMainBinding
 import com.atom.searchcoffe.di.AppComponent
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appComponent: AppComponent
     private lateinit var binding: ActivityMainBinding
 
@@ -23,15 +20,17 @@ class MainActivity : AppCompatActivity() {
 
         appComponent = (application as App).appComponent
         appComponent.inject(this)
-        val navView: BottomNavigationView = binding.navView
 
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+
+        val navController: NavController = navHostFragment.navController
+
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

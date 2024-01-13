@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.atom.searchcoffe.App
@@ -18,6 +19,7 @@ import com.atom.searchcoffe.domain.dto.LoginRequest
 import javax.inject.Inject
 
 class LoginFragment : Fragment() {
+
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -38,6 +40,7 @@ class LoginFragment : Fragment() {
         val appComponent = (requireActivity().application as App).appComponent
         appComponent.inject(this)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
         observeViewModel()
         addTextChangedListener()
         binding.btnSignIn.setOnClickListener {
@@ -56,6 +59,11 @@ class LoginFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar?.title = "Вход"
     }
 
     private fun goToRegister() {

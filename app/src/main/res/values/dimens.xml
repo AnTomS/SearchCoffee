@@ -11,6 +11,12 @@
     <dimen name="spacing_big">64dp</dimen>
     <dimen name="spacing_very_big">180dp</dimen>
 
+
+    <dimen name="width_for_btn">338dp</dimen>
+    <dimen name="height_for_btn">47dp</dimen>
+
+
+
     <dimen name="text_large">18sp</dimen>
     <dimen name="text_small">14sp</dimen>
     <dimen name="text_medium">16sp</dimen>

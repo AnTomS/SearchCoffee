@@ -8,48 +8,40 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.atom.searchcoffe.R
-import com.atom.searchcoffe.databinding.ItemForListCoffeshopBinding
 import com.atom.searchcoffe.domain.dto.LocationRespondItem
 
 class CoffeeShopAdapter(
-    private val coffeeShops:List<LocationRespondItem>
-):RecyclerView.Adapter<CoffeeShopAdapter.CoffeeShopViewHolder>() {
-
-    private var clickListener: (Int) -> Unit = {}
+    private var coffeeShops: List<LocationRespondItem>,
+    private val clickListener: (Int) -> Unit
+) : RecyclerView.Adapter<CoffeeShopAdapter.CoffeeShopViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeShopViewHolder =
         CoffeeShopViewHolder(
             view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_coffee_shop,parent,false)
+                .inflate(R.layout.item_for_list_coffeshop, parent, false)
         )
 
     override fun getItemCount(): Int = coffeeShops.size
 
     override fun onBindViewHolder(holder: CoffeeShopViewHolder, position: Int) {
-        holder.bind(
-            name = coffeeShops[position].name,
-            cardClick = { clickListener(coffeeShops[position].id) }
-        )
+        holder.bind(coffeeShops[position], clickListener)
     }
 
-    fun setClickListener(clickListener:(Int)->Unit){
-        this.clickListener = clickListener
-    }
-
-    class CoffeeShopViewHolder(view: View):RecyclerView.ViewHolder(view) {
-
+    class CoffeeShopViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val coffeeShopName = view.findViewById<TextView>(R.id.coffee_shop_name)
-        private val card = view.findViewById<CardView>(R.id.coffee_shop_card)
 
-        fun bind(
-            name:String,
-            cardClick:() -> Unit
-        ){
-            coffeeShopName.text = name
-            card.setOnClickListener {
-                cardClick()
-            }
+        fun bind(location: LocationRespondItem, clickListener: (Int) -> Unit) {
+            coffeeShopName?.text = location.name
+            itemView.setOnClickListener { clickListener(location.id) }
         }
+    }
 
+    class MenuViewHolder {
+
+    }
+
+    fun updateData(newCoffeeShops: List<LocationRespondItem>) {
+        coffeeShops = newCoffeeShops
+        notifyDataSetChanged()
     }
 }

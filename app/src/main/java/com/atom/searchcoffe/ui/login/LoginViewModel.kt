@@ -1,6 +1,9 @@
 package com.atom.searchcoffe.ui.login
 
 import android.content.SharedPreferences
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,16 +37,21 @@ class LoginViewModel @Inject constructor(
         }
         viewModelScope.launch {
             _loginState.value = ResponseState.Loading()
-            _loginState.value = try {
-                ResponseState.Success(loginUseCase.execute(request))
+            try {
+                val loginResponse = loginUseCase.execute(request)
+                val token = loginResponse.token
+                Log.d("LoginViewModel", "Received token: $token")
+                saveToken(token)
+                _loginState.value = ResponseState.Success(loginResponse)
             } catch (e: Exception) {
-                ResponseState.Error()
+                Log.e("LoginViewModel", "Error during login", e)
+                _loginState.value = ResponseState.Error()
             }
         }
     }
 
     private fun saveToken(token: String) {
-        sharedPreferences.edit().putString(TOKEN_KEY, token).apply()
+        sharedPreferences.edit().putString("auth_token", token).apply()
     }
 
     private fun validateInput(login: String, password: String): Boolean {

@@ -2,10 +2,12 @@ package com.atom.searchcoffe.ui.coffeeshop
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,35 +34,46 @@ class CoffeeShopFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val appComponent = (requireActivity().application as App).appComponent
+        appComponent.inject(this)
+
         _binding = FragmentCoffeeShopBinding.inflate(inflater, container, false)
 
+        val adapter = CoffeeShopAdapter(coffeeShops = emptyList()) { id ->
+            coffeeShopViewModel.setSelectedLocationId(id)
+            findNavController().navigate(
+                CoffeeShopFragmentDirections.actionCoffeeShopFragmentToMenuFragment(
+                    id
+                )
+            )
+        }
+
+        binding.rcCoffeeShop.layoutManager = LinearLayoutManager(requireContext())
+        binding.rcCoffeeShop.adapter = adapter
+
         coffeeShopViewModel.loadLocations()
-        coffeeShopViewModel.locations.observe(viewLifecycleOwner){value ->
-            when(value){
+        coffeeShopViewModel.locations.observe(viewLifecycleOwner) { value ->
+            when (value) {
                 is ResponseState.Error -> {
-                    Toast.makeText(requireActivity(), "some error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_LONG).show()
+                    Log.e("CoffeeShopFragment", "Error loading data")
                 }
+
                 is ResponseState.Loading -> {
+                    Log.d("CoffeeShopFragment", "Loading data...")
                 }
+
                 is ResponseState.Success -> {
-                    val adapter = CoffeeShopAdapter(
-                        coffeeShops = value.data
-                    )
-                    adapter.setClickListener {id ->
-                        findNavController().navigate(CoffeeShopFragmentDirections.actionCoffeeShopFragmentToMenuFragment(id))
-                    }
-                    binding.rcCoffeeShop.layoutManager = LinearLayoutManager(requireActivity())
-                    binding.rcCoffeeShop.adapter = adapter
-                    }
+                    Log.d("CoffeeShopFragment", "Data loaded successfully: ${value.data}")
+                    // Обновляем данные в существующем адаптере
+                    adapter.updateData(value.data)
                 }
             }
+        }
 
         return binding.root
     }
 
-    private fun goToMenu() {
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
