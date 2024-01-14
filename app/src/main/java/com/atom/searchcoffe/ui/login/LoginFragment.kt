@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.atom.searchcoffe.App
@@ -61,11 +60,6 @@ class LoginFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity).supportActionBar?.title = "Вход"
-    }
-
     private fun goToRegister() {
         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
@@ -86,7 +80,6 @@ class LoginFragment : Fragment() {
                 }
 
                 is ResponseState.Loading -> {
-                    Toast.makeText(requireActivity(), "StateLoading", Toast.LENGTH_LONG).show()
                 }
             }
         }

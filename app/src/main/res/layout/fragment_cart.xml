@@ -4,67 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cart.CartFragment"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <!-- Ваша Toolbar -->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        android:elevation="4dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/button_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/back_24"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_view_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ваш заказ"
-                android:layout_centerInParent="true"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="20sp"
-                android:textColor="@color/main_text" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView1"
+            android:id="@+id/rcCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_for_menu" />
-
+            tools:listitem="@layout/item_for_cart" />
 
         <TextView
+            android:layout_margin="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ваша корзина пуста" />
+            android:text="@string/thx_for_pay"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_big"/>
+    </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/go_to_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:text="Оплатить"
+        android:textAllCaps="false"
+        android:textColor="@color/kinda_rose"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold"
+        app:backgroundTint="@color/kinda_brown"
+        app:cornerRadius="24.5dp" />
+
 </LinearLayout>

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.atom.searchcoffe.App
 import com.atom.searchcoffe.databinding.FragmentMenuBinding
 import com.atom.searchcoffe.domain.dto.CartItem
+import com.atom.searchcoffe.domain.dto.Coffee
 import javax.inject.Inject
 
 class MenuFragment : Fragment(), MenAdapter.OnCartClickListener {
@@ -29,11 +31,6 @@ class MenuFragment : Fragment(), MenAdapter.OnCartClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity().application as App).appComponent.inject(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -55,6 +52,11 @@ class MenuFragment : Fragment(), MenAdapter.OnCartClickListener {
             adapter = menuAdapter
         }
 
+        binding.goToPayment.setOnClickListener {
+            goToCart()
+        }
+
+
         observeViewModel()
 
         menuViewModel.getMenu(id!!)
@@ -64,21 +66,31 @@ class MenuFragment : Fragment(), MenAdapter.OnCartClickListener {
 
     private fun observeViewModel() {
         menuViewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
-            Log.e("MenuFragment", cartItems.toString())
-            // Передаем в адаптер новый список и старый, чтобы управлять обновлением
+            Log.e("MenuFragment", "cartItems observed: $cartItems")
             menuAdapter.submitList(cartItems) {
                 menuAdapter.notifyDataSetChanged()
+                Log.e("MenuFragment", "menuAdapter updated")
+//                menuViewModel.updateSelectedItemsForPayment()
             }
-
         }
 
         menuViewModel.updatedCartItem.observe(viewLifecycleOwner) { updatedCartItem ->
-            // Находим позицию обновленного элемента в списке и обновляем только этот элемент
-            val position = menuAdapter.currentList.indexOfFirst { it.coffee.id == updatedCartItem.first.id }
+            val position =
+                menuAdapter.currentList.indexOfFirst { it.coffee.id == updatedCartItem.first.id }
             if (position != -1) {
                 menuAdapter.notifyItemChanged(position)
+                Log.e("MenuFragment", "Item at position $position updated")
+ //               menuViewModel.updateSelectedItemsForPayment()
             }
         }
+    }
+
+    private fun goToCart() {
+//        val selectedItems = menuViewModel.selectedItemsForPayment.value.orEmpty()
+//        menuViewModel.setSelectedItemsForPayment(selectedItems)
+        val order = menuViewModel.getOrderListJson()
+        val action = MenuFragmentDirections.actionMenuFragmentToCartFragment(order)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

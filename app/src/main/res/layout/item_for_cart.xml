@@ -33,7 +33,7 @@
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/text_medium" />
 
-        <!-- Блок с кнопками "-" и "+" -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttonLayout"
             android:layout_width="wrap_content"
@@ -41,10 +41,10 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true">
 
-            <!-- Кнопка "-" для уменьшения количества -->
-            <ImageView
+
+            <ImageButton
                 android:clickable="true"
-                android:id="@+id/imageDecreaseDish"
+                android:id="@+id/imageDecreaseCoffee"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/remove_dark_24"
@@ -61,12 +61,12 @@
                 android:textColor="@color/main_text"
                 android:text="1"
                 android:textSize="@dimen/text_large"
-                app:layout_constraintStart_toEndOf="@id/imageDecreaseDish"
+                app:layout_constraintStart_toEndOf="@id/imageDecreaseCoffee"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageIncreaseDish"
+            <ImageButton
+                android:id="@+id/imageIncreaseCoffee"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/add_dark_24"

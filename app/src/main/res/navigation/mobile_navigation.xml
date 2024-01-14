@@ -46,10 +46,21 @@
         android:id="@+id/cartFragment"
         android:name="com.atom.searchcoffe.ui.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+
+        <argument
+            android:name="order"
+            app:argType="string" />
+    </fragment>
+
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.atom.searchcoffe.ui.menu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_cartFragment"
+            app:destination="@id/cartFragment">
+        </action>
+    </fragment>
 </navigation>

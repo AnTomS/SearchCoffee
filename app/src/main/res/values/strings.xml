@@ -18,4 +18,5 @@
     <string name="price_coffe">стоимость порции</string>
     <string name="name_coffee">название напитка</string>
     <string name="go_to_pay">Перейти к оплате</string>
+    <string name="thx_for_pay">Время ожидания заказа 15 минут! Спасибо, что выбрали нас!</string>
 </resources>
